@@ -1,0 +1,100 @@
+<%%= form_with(model: <%= name %>, local: true) do |form| %>
+  <%- attributes.each do |attr| -%>
+  <%- if attr.type == :boolean -%>
+  <div class='mb-3'>
+    <div class="form-check">
+      <%%= form.check_box :<%= attr.name %>, class: ['form-check-input', invalid_class(@<%= name %>, :<%= attr.name %>)] %>
+      <%%= form.label :<%= attr.name %>, class: 'form-check-label' %>
+      <%% if has_error(@<%= name %>, :<%= attr.name %>) %>
+      <%%= tag.div error_messages(@<%= name %>, :<%= attr.name %>), class: 'invalid-feedback' %>
+      <%% end %>
+    </div>
+  </div>
+  <% elsif attr.type == :references %>
+  <div class='mb-3'>
+    <%%= form.label :<%= attr.name %>_id, class: 'form-label' %>
+    # TODO: Replace :name for attribute correct
+    <%%= form.select :<%= attr.name %>_id, <%= attr.name.classify %>.pluck(:name, :id), {}, class: ['form-select', invalid_class(@<%= name %>, :<%= attr.name %>)] %>
+    <%% if has_error(@<%= name %>, :<%= attr.name %>) %>
+      <%%= tag.div error_messages(@<%= name %>, :<%= attr.name %>), class: 'invalid-feedback' %>
+    <%% end %>
+  </div>
+  <% elsif attr.type == :digest %>
+  <div class='mb-3'>
+    <%%= form.label :<%= attr.name %>, class: 'form-label' %>
+    <%%= form.password_field :<%= attr.name %>, class: ['form-control', invalid_class(@<%= name %>, :<%= attr.name %>)] %>
+    <%% if has_error(@<%= name %>, :<%= attr.name %>) %>
+      <%%= tag.div error_messages(@<%= name %>, :<%= attr.name %>), class: 'invalid-feedback' %>
+    <%% end %>
+  </div>
+  <div class='mb-3'>
+    <%%= form.label :<%= attr.name %>_confirmation, class: 'form-label' %>
+    <%%= form.password_field :<%= attr.name %>_confirmation, class: ['form-control', invalid_class(@<%= name %>, :<%= attr.name %>)] %>
+    <%% if has_error(@<%= name %>, :<%= attr.name %>) %>
+      <%%= tag.div error_messages(@<%= name %>, :<%= attr.name %>), class: 'invalid-feedback' %>
+    <%% end %>
+  </div>
+  <% elsif attr.type == :date %>
+  <div class='mb-3'>
+    <%%= form.label :<%= attr.name %>, class: 'form-label' %>
+    <%%= form.date_field :<%= attr.name %>, class: ['form-control', invalid_class(@<%= name %>, :<%= attr.name %>)] %>
+    <%% if has_error(@<%= name %>, :<%= attr.name %>) %>
+      <%%= tag.div error_messages(@<%= name %>, :<%= attr.name %>), class: 'invalid-feedback' %>
+    <%% end %>
+  </div>
+  <% elsif attr.type == :datetime %>
+  <div class='mb-3'>
+    <%%= form.label :<%= attr.name %>, class: 'form-label' %>
+    <%%= form.datetime_field :<%= attr.name %>, class: ['form-control', invalid_class(@<%= name %>, :<%= attr.name %>)] %>
+    <%% if has_error(@<%= name %>, :<%= attr.name %>) %>
+      <%%= tag.div error_messages(@<%= name %>, :<%= attr.name %>), class: 'invalid-feedback' %>
+    <%% end %>
+  </div>
+  <% elsif attr.type == :integer %>
+  <div class='mb-3'>
+    <%%= form.label :<%= attr.name %>, class: 'form-label' %>
+    <%%= form.number_field :<%= attr.name %>, class: ['form-control', invalid_class(@<%= name %>, :<%= attr.name %>)] %>
+    <%% if has_error(@<%= name %>, :<%= attr.name %>) %>
+      <%%= tag.div error_messages(@<%= name %>, :<%= attr.name %>), class: 'invalid-feedback' %>
+    <%% end %>
+  </div>
+  <% elsif attr.type == :text %>
+  <div class='mb-3'>
+    <%%= form.label :<%= attr.name %>, class: 'form-label' %>
+    <%%= form.text_area :<%= attr.name %>, class: ['form-control', invalid_class(@<%= name %>, :<%= attr.name %>)] %>
+    <%% if has_error(@<%= name %>, :<%= attr.name %>) %>
+      <%%= tag.div error_messages(@<%= name %>, :<%= attr.name %>), class: 'invalid-feedback' %>
+    <%% end %>
+  </div>
+  <% else %>
+  <div class='mb-3'>
+    <%%= form.label :<%= attr.name %>, class: 'form-label' %>
+    <%%= form.text_field :<%= attr.name %>, class: ['form-control', invalid_class(@<%= name %>, :<%= attr.name %>)] %>
+    <%% if has_error(@<%= name %>, :<%= attr.name %>) %>
+      <%%= tag.div error_messages(@<%= name %>, :<%= attr.name %>), class: 'invalid-feedback' %>
+    <%% end %>
+  </div>
+  <%- end -%>
+  <%- end -%>
+
+  <div class="form-actions">
+    <div class="btn-group">
+      <%%= form.button type: 'submit', class: 'btn btn-primary' do %>
+        <i class="fas fa-save"></i>
+        Salvar
+      <%% end %>
+
+      <%% if action_name == 'edit' %>
+        <%%= link_to @<%= name %>, class: 'btn btn-info' do %>
+          <i class="fas fa-eye"></i>
+          Exibir
+        <%% end %>
+      <%% end %>
+
+      <%%= link_to <%= plural_name %>_path, class: 'btn btn-warning' do %>
+        <i class="fas fa-arrow-left"></i>
+        Voltar
+      <%% end %>
+    </div>
+  </div>
+<%% end %>

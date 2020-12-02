@@ -1,0 +1,23 @@
+<h1 class="mb-3 h3">Detalhes de <%= name %></h1>
+
+<dl class="row">
+  <%- attributes.each do |attr| -%>
+  <%- if attr.type != :digest -%>
+  <dt class="col-md-3 col-xl-2"><%= attr.name.humanize %>:</dt>
+  <dd class="col-md-9 col-xl-10"><%%= @<%= name + '.' + attr.name %> %></dd>
+  <%- end -%>
+
+  <%- end -%>
+</dl>
+
+<div class="btn-group">
+  <%%= link_to edit_<%= name %>_path(@<%= name %>), class: 'btn btn-primary' do %>
+    <i class="fas fa-edit"></i>
+    Editar
+  <%% end %>
+
+  <%%= link_to <%= plural_name %>_path, class: 'btn btn-warning' do %>
+    <i class="fas fa-arrow-left"></i>
+    Voltar
+  <%% end %>
+</div>
