@@ -9,3 +9,7 @@ Para utilizar esses arquivos de template é só copiar o diretório _templates_ 
 O template _form_ utiliza as classes da validação do Bootstrap 5, e para gerar essas classes e o container de feedback é necessário utilizar alguns helpers que estão neste repositório dentro do diretório _helpers_.
 
 Após isso é só utilizar os comandos de geração de scaffold do Rails e os arquivos de view estarão com a marcação básica para Bootstrap 5.
+
+## Observação
+
+Este projeto utiliza ícones do Font [Font Awesome](https://fontawesome.com), que deverá estar instalado em seu projeto.
